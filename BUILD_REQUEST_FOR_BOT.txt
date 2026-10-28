@@ -1,0 +1,11 @@
+IMPORTANT: This ZIP is already the Flutter project root. The file pubspec.yaml is at the archive root. Do NOT treat this archive as a Gradle-only project and do NOT search for gradlew from a parent folder.
+
+Build procedure:
+1. Run pwd and ls -la; confirm pubspec.yaml exists in the current directory.
+2. Run flutter --version.
+3. Run flutter create --platforms=android --project-name rw_gacor . to regenerate any missing official Android scaffold/wrapper files while preserving lib/, assets/, and pubspec.yaml. If the command reports a conflict, inspect the files and repair the missing scaffold without deleting Dart/Kotlin source.
+4. Run flutter pub get.
+5. Run flutter analyze and flutter test; report actual PASS/FAIL/NOT RUN.
+6. Run flutter build apk --debug (preferred first to validate installation) and then flutter build apk --release if requested.
+7. Verify the generated APK with Android SDK apksigner verify --verbose --print-certs. Attach the exact APK generated under build/app/outputs/flutter-apk/.
+8. Do not report success unless the actual build and verification commands passed. If any command fails, attach the real relevant log.
