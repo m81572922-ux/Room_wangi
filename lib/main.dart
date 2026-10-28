@@ -147,14 +147,12 @@ class _HomePageState extends State<HomePage> {
                 _header(),
                 _statusBar(),
                 Expanded(
-                  child: shizukuPermission
-                      ? AnimatedSwitcher(
-                          duration: const Duration(milliseconds: 220),
-                          child: _pageBody(key: ValueKey(selected)),
-                        )
-                      : _shizukuGate(),
+                  child: AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 220),
+                    child: _pageBody(key: ValueKey(selected)),
+                  ),
                 ),
-                if (shizukuPermission) _bottomNav(),
+                _bottomNav(),
               ],
             ),
             if (floatingMenuOpen)
