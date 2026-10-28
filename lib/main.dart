@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 void main() => runApp(const RWGacorApp());
 
@@ -49,6 +50,27 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     _checkShizuku();
+  }
+
+  Future<void> _openMlbb() async {
+    final game = Uri.parse(
+      'intent://launch#Intent;package=com.mobile.legends;end',
+    );
+    try {
+      final opened = await launchUrl(
+        game,
+        mode: LaunchMode.externalApplication,
+      );
+      if (!opened && mounted) {
+        setStatus('MLBB tidak terbuka. Pastikan game sudah terpasang.');
+      } else if (mounted) {
+        setStatus('Permintaan membuka MLBB dikirim.');
+      }
+    } catch (_) {
+      if (mounted) {
+        setStatus('MLBB tidak terbuka. Pastikan game sudah terpasang.');
+      }
+    }
   }
 
   Future<void> _checkShizuku() async {
@@ -261,6 +283,11 @@ class _HomePageState extends State<HomePage> {
                           fontWeight: FontWeight.w700)),
                 ],
               ),
+            ),
+            IconButton(
+              tooltip: 'Buka MLBB',
+              onPressed: _openMlbb,
+              icon: const Icon(Icons.sports_esports, color: cyan),
             ),
             IconButton(
               tooltip: 'Buka/tutup menu melayang',

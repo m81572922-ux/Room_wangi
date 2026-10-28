@@ -28,6 +28,15 @@ if compgen -G "$TMP_DIR/mipmap/*" >/dev/null; then
   cp -a "$TMP_DIR"/mipmap/* android/app/src/main/res/
 fi
 
+# Ensure the adaptive launcher icon has its required color resource.
+mkdir -p android/app/src/main/res/values
+cat > android/app/src/main/res/values/colors.xml <<'COLORS'
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="ic_launcher_background">#08051D</color>
+</resources>
+COLORS
+
 # Add Shizuku libraries to whichever Gradle DSL Flutter generated.
 python3 - <<'PY'
 from pathlib import Path
